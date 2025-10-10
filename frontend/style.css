@@ -1,0 +1,116 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px;
+  margin-top: 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.2em;
+  color: #00c6ff;
+}
+
+.main-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.upload-section {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-section:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.job-description-section {
+  margin-top: 25px;
+}
+
+.job-description {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  border: none;
+  padding: 15px;
+  resize: none;
+  font-family: inherit;
+}
+
+.scan-button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.scan-button:hover {
+  transform: scale(1.02);
+}
+
+.loading {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.spinner {
+  width: 35px;
+  height: 35px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top: 4px solid #00c6ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.results-section {
+  margin-top: 30px;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 10px;
+}

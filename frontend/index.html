@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATS Resume Optimizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎯 ATS Resume Scanner</h1>
+      <p>Optimize your resume to pass Applicant Tracking Systems and land more interviews</p>
+    </div>
+
+    <div class="main-card">
+      <div class="upload-section" onclick="document.getElementById('resumeFile').click()">
+        <div class="upload-icon">📄</div>
+        <h2>Upload Your Resume</h2>
+        <p>Drop your resume here or click to browse</p>
+        <p style="margin-top: 10px; opacity: 0.7;">Supports: PDF, DOC, DOCX, TXT</p>
+        <input type="file" id="resumeFile" class="file-input" accept=".pdf,.doc,.docx,.txt" />
+      </div>
+
+      <!-- ✅ Progress bar section -->
+      <div id="progressContainer" style="
+        width: 100%;
+        background: #eee;
+        border-radius: 8px;
+        overflow: hidden;
+        display: none;
+        margin-top: 15px;
+        position: relative;
+        height: 20px;
+      ">
+        <div id="progressBar" style="
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, #667eea, #764ba2);
+          transition: width 0.2s ease;
+        "></div>
+        <span id="progressText" style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.9em;
+          color: #000;
+          line-height: 20px;
+          font-weight: 500;
+          display: none;
+        ">0%</span>
+      </div>
+
+      <div class="job-description-section">
+        <h3>📋 Job Description (Optional)</h3>
+        <textarea id="jobDescription" class="job-description" placeholder="Paste the job description here..."></textarea>
+      </div>
+
+      <button class="scan-button" id="scanButton">🔍 Scan Resume</button>
+
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Analyzing your resume...</p>
+      </div>
+
+      <div class="results-section" id="results"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- ✅ Progress bar logic -->
+  <script>
+    const fileInput = document.getElementById("resumeFile");
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        progressContainer.style.display = "block";
+        progressText.style.display = "block";
+        progressBar.style.width = "0%";
+        progressText.textContent = "0%";
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 5;
+          progressBar.style.width = progress + "%";
+          progressText.textContent = progress + "%";
+
+          if (progress >= 100) {
+            clearInterval(interval);
+            progressText.textContent = "100%";
+            setTimeout(() => {
+              progressContainer.style.display = "none";
+              progressText.style.display = "none";
+              alert(`✅ ${file.name} uploaded successfully!`);
+            }, 700);
+          }
+        }, 150);
+      }
+    });
+  </script>
+</body>
+</html>
