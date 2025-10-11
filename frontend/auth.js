@@ -1,41 +1,70 @@
-// frontend/script.js
+// frontend/auth.js
 
-const DASHBOARD_API = "https://ats-resume-backend-jm00.onrender.com/";
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://ats-resume-backend-jm00.onrender.com";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("token");
-  if (!token && window.location.pathname.endsWith("dashboard.html")) {
-    alert("Please log in first!");
-    window.location.href = "login.html";
+// REGISTER USER
+async function registerUser() {
+  const name = document.getElementById("registerName").value.trim();
+  const email = document.getElementById("registerEmail").value.trim();
+  const password = document.getElementById("registerPassword").value.trim();
+
+  if (!name || !email || !password) {
+    alert("Please fill in all fields.");
     return;
   }
 
-  if (window.location.pathname.endsWith("dashboard.html")) {
-    await loadResumes();
+  try {
+    const response = await fetch(`${API_BASE}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Registration successful! Please log in.");
+      window.location.href = "login.html";
+    } else {
+      alert(data.message || "Something went wrong. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Server error. Please check your connection.");
   }
-});
+}
 
-async function loadResumes() {
-  const token = localStorage.getItem("token");
-  const res = await fetch(`${DASHBOARD_API}/user`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+// LOGIN USER
+async function loginUser() {
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
 
-  const data = await res.json();
-  const container = document.getElementById("resumeList");
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
 
-  if (res.ok && data.resumes?.length) {
-    container.innerHTML = data.resumes
-      .map(
-        (r) => `
-      <div class="resume-card">
-        <h3>${r.fileName}</h3>
-        <p>Score: ${r.score || "N/A"}%</p>
-        <p>Date: ${new Date(r.createdAt).toLocaleDateString()}</p>
-      </div>`
-      )
-      .join("");
-  } else {
-    container.innerHTML = "<p>No resumes found yet. Upload one on the main page!</p>";
+  try {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      alert("Login successful!");
+      window.location.href = "dashboard.html";
+    } else {
+      alert(data.message || "Invalid credentials.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Server error. Please check your connection.");
   }
 }
