@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ATS Resume Optimizer</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 🔹 Profile icon styling */
+    .profile-container {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: sans-serif;
+      color: #fff;
+    }
+
+    .profile-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4em;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    /* 🔹 Mini Sidebar (Compact & Gradient) */
+    .profile-sidebar {
+      position: fixed;
+      top: 60px;
+      right: -280px;
+      width: 200px;
+      height: auto;
+      max-height: 300px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px 0 0 16px;
+      box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.3);
+      transition: right 0.3s ease;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      color: white;
+    }
+
+    .profile-sidebar.active {
+      right: 20px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.1em;
+      margin: 0;
+      color: #fff;
+    }
+
+    .close-sidebar {
+      cursor: pointer;
+      font-size: 1.2em;
+      opacity: 0.8;
+    }
+
+    .close-sidebar:hover {
+      opacity: 1;
+    }
+
+    /* LEFT-ALIGNED CONTENT (was centered before) */
+    .profile-details {
+      flex: 1;
+      font-size: 0.9em;
+      text-align: left;       /* <-- changed to left align */
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #fff;
+      color: #764ba2;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px auto;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-details p {
+      margin: 8px 0;
+      color: #f2f2f2;
+      word-break: break-word;
+    }
+
+    .profile-details ul {
+      margin-left: 16px;
+      padding-left: 0;
+    }
+
+    .profile-details li {
+      margin-bottom: 6px;
+      list-style: disc;
+      color: #f2f2f2;
+    }
+
+    .logout-btn {
+      margin-top: 15px;
+      padding: 10px;
+      background: #fff;
+      color: #764ba2;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* small tweak so profile container doesn't overlap content on very small screens */
+    @media (max-width: 420px) {
+      .profile-container { right: 12px; top: 12px; }
+    }
+  </style>
 </head>
 <body>
+  <!-- ✅ Profile icon only -->
+  <div class="profile-container">
+    <div class="profile-icon" id="profileIcon">👤</div>
+  </div>
+
+  <!-- ✅ Compact Sidebar -->
+  <div class="profile-sidebar" id="profileSidebar" aria-hidden="true">
+    <div class="sidebar-header">
+      <h2>My Profile</h2>
+      <span class="close-sidebar" id="closeSidebar" role="button" aria-label="Close">✖</span>
+    </div>
+
+    <!-- avatar shown at top of panel -->
+    <div class="profile-avatar" id="profileAvatar">👤</div>
+
+    <div class="profile-details">
+      <p class="inline"><strong>Email:</strong> <span id="sidebarEmail">user@example.com</span></p>
+      <p style="margin-top:10px;"><strong>Saved Resumes :</strong></p>
+      <ul id="resumeList" style="margin-left: 16px;">
+        <li>No resumes saved yet.</li>
+      </ul>
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- ✅ Main Page (unchanged) -->
   <div class="container">
     <div class="header">
       <h1>🎯 ATS Resume Scanner</h1>
@@ -25,7 +189,6 @@
         <input type="file" id="resumeFile" class="file-input" accept=".pdf,.doc,.docx,.txt" />
       </div>
 
-      <!-- ✅ Progress bar section -->
       <div id="progressContainer" style="
         width: 100%;
         background: #eee;
@@ -72,40 +235,122 @@
   </div>
 
   <script src="script.js"></script>
-
-  <!-- ✅ Progress bar logic -->
   <script>
-    const fileInput = document.getElementById("resumeFile");
-    const progressContainer = document.getElementById("progressContainer");
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
+    const profileIcon = document.getElementById("profileIcon");
+    const profileSidebar = document.getElementById("profileSidebar");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const sidebarEmail = document.getElementById("sidebarEmail");
+    const profileAvatar = document.getElementById("profileAvatar");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const resumeListEl = document.getElementById("resumeList");
 
-    fileInput.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        progressContainer.style.display = "block";
-        progressText.style.display = "block";
-        progressBar.style.width = "0%";
-        progressText.textContent = "0%";
+    // Open/close sidebar
+    profileIcon.addEventListener("click", () => {
+      profileSidebar.classList.add("active");
+      profileSidebar.setAttribute("aria-hidden", "false");
+      // When opening, ensure we load profile if needed
+      ensureProfileLoaded();
+      loadResumesList();
+    });
 
-        let progress = 0;
-        const interval = setInterval(() => {
-          progress += 5;
-          progressBar.style.width = progress + "%";
-          progressText.textContent = progress + "%";
+    closeSidebar.addEventListener("click", () => {
+      profileSidebar.classList.remove("active");
+      profileSidebar.setAttribute("aria-hidden", "true");
+    });
 
-          if (progress >= 100) {
-            clearInterval(interval);
-            progressText.textContent = "100%";
-            setTimeout(() => {
-              progressContainer.style.display = "none";
-              progressText.style.display = "none";
-              alert(`✅ ${file.name} uploaded successfully!`);
-            }, 700);
-          }
-        }, 150);
+    // Logout
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    });
+
+    // Helper: API base (fallbacks)
+    const API_BASE = "https://ats-resume-backend-jm00.onrender.com";
+
+    const token = localStorage.getItem("token");
+
+    // Try localStorage first; if missing, fetch profile from backend
+    async function ensureProfileLoaded() {
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        fillProfile(user);
+        return;
+      }
+
+      if (!token) {
+        // no token — redirect to login
+        window.location.href = "login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) {
+          // don't crash — show fallback text
+          console.warn("Profile fetch failed:", res.status);
+          sidebarEmail.textContent = "Unknown user";
+          profileAvatar.textContent = "👤";
+          return;
+        }
+
+        const data = await res.json();
+        // save for later
+        try { localStorage.setItem("user", JSON.stringify(data)); } catch (e) { /* ignore storage errors */ }
+        fillProfile(data);
+      } catch (err) {
+        console.error("Profile fetch error:", err);
+        sidebarEmail.textContent = "Unknown user";
+        profileAvatar.textContent = "👤";
+      }
+    }
+
+    function fillProfile(user) {
+      const email = user?.email || "user@example.com";
+      sidebarEmail.textContent = email;
+      // avatar: use first letter of local-part of email
+      const initial = (email && email.charAt(0)) ? email.charAt(0).toUpperCase() : "U";
+      profileAvatar.textContent = initial;
+      profileIcon.textContent = initial;
+    }
+
+    // Load user's saved resumes into the sidebar (calls backend list endpoint)
+    async function loadResumesList() {
+      if (!token) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/resume/list`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) return;
+        const list = await res.json();
+        resumeListEl.innerHTML = "";
+        if (!Array.isArray(list) || list.length === 0) {
+          resumeListEl.innerHTML = "<li>No resumes saved yet.</li>";
+          return;
+        }
+        list.slice(0, 10).forEach(r => {
+          const li = document.createElement("li");
+          li.textContent = r.fileName || r.originalName || "Resume";
+          resumeListEl.appendChild(li);
+        });
+      } catch (e) {
+        console.warn("Could not load resumes list", e);
+      }
+    }
+
+    // Close sidebar when clicking outside
+    window.addEventListener("click", (e) => {
+      if (!profileSidebar.contains(e.target) && !profileIcon.contains(e.target)) {
+        profileSidebar.classList.remove("active");
+        profileSidebar.setAttribute("aria-hidden", "true");
       }
     });
+
+    
   </script>
 </body>
 </html>

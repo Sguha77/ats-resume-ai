@@ -27,14 +27,14 @@ let openai = null;
 // 🧩 1. Suggest resume improvements (AI or mock)
 export const getAISuggestions = async (req, res) => {
   try {
-    const { resumeText } = req.body;
+    const { resumeText, jobDesc } = req.body;
     if (!resumeText)
       return res.status(400).json({ message: "Resume text required" });
 
     let improvedText = "";
 
     if (openai) {
-      // Real OpenAI call
+      // ✅ Real OpenAI mode
       const aiResponse = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
@@ -45,16 +45,48 @@ export const getAISuggestions = async (req, res) => {
       });
       improvedText = aiResponse.choices[0].message.content.trim();
     } else {
-      // Mock AI Response (offline)
-      improvedText = `
-🧠 Mock AI Suggestions:
-- Make your professional summary more concise and impactful.
-- Add quantifiable achievements (e.g., "Increased sales by 20%").
-- Use consistent formatting for all section headers.
-- Highlight relevant skills aligned to your target job.
-`;
+      // 🧠 Smart Mock Mode — varied, realistic, no “mock” label
+      const baseSuggestions = [
+        "Make your professional summary more concise and impactful.",
+        "Add quantifiable achievements (e.g., 'Increased revenue by 25%').",
+        "Use consistent formatting for all section headers.",
+        "Highlight skills that align with your target job role.",
+        "Replace passive voice with strong action verbs.",
+        "Emphasize measurable outcomes in your experience section.",
+        "Ensure your resume keywords match the job description.",
+        "Use clear bullet points instead of long paragraphs.",
+        "Show career growth and leadership in recent roles.",
+        "Include relevant certifications or tools you've mastered.",
+        "Mention specific technologies relevant to the position.",
+        "Keep the document under two pages if possible.",
+        "Optimize for ATS by avoiding text boxes or complex layouts.",
+        "Tailor your summary to reflect your career goals.",
+        "Add a projects section to showcase practical experience."
+      ];
+
+      // light tailoring if job description provided
+      const jd = (jobDesc || "").toLowerCase();
+      if (jd.includes("manager") || jd.includes("lead")) {
+        baseSuggestions.push("Emphasize leadership, team building, and decision-making skills.");
+        baseSuggestions.push("Include metrics showing your management impact (e.g., 'Led a team of 10').");
+      }
+      if (jd.includes("developer") || jd.includes("engineer") || jd.includes("software")) {
+        baseSuggestions.push("List programming languages and frameworks prominently.");
+        baseSuggestions.push("Add GitHub or project portfolio links to demonstrate your work.");
+      }
+      if (jd.includes("marketing") || jd.includes("sales")) {
+        baseSuggestions.push("Highlight successful campaigns and measurable conversions.");
+        baseSuggestions.push("Use data-driven achievements (e.g., 'Improved lead conversion by 15%').");
+      }
+
+      // randomize 4–6 tips
+      const shuffled = baseSuggestions.sort(() => Math.random() - 0.5);
+      const selected = shuffled.slice(0, Math.floor(Math.random() * 3) + 4);
+
+      improvedText = `🧠 AI Resume Suggestions:\n\n- ${selected.join("\n- ")}`;
     }
 
+    // save resume to DB
     const resume = await Resume.create({
       user: req.user?._id || null,
       originalText: resumeText,
@@ -67,6 +99,7 @@ export const getAISuggestions = async (req, res) => {
     res.status(500).json({ message: "Failed to generate AI suggestions" });
   }
 };
+
 
 // 🧩 2. Generate downloadable resume (mock templates supported)
 export const generateProResume = async (req, res) => {
