@@ -1,6 +1,6 @@
 // frontend/script.js
 
-const DASHBOARD_API = "http://";
+const DASHBOARD_API = "https://ats-resume-backend-jm00.onrender.com/";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");

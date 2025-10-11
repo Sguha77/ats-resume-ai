@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://"; // change to deployed backend later
+const BACKEND_URL = "https://ats-resume-backend-jm00.onrender.com/"; // change to deployed backend later
 
 document.getElementById("scanButton").addEventListener("click", async () => {
   const fileInput = document.getElementById("resumeFile");
