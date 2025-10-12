@@ -1,3 +1,4 @@
+/* ---------- Base Styles ---------- */
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #141e30, #243b55);
@@ -8,6 +9,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
@@ -27,6 +29,7 @@ body {
   color: #00c6ff;
 }
 
+/* ---------- Main Card ---------- */
 .main-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -35,6 +38,7 @@ body {
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
 }
 
+/* ---------- Upload Section ---------- */
 .upload-section {
   border: 2px dashed rgba(255, 255, 255, 0.3);
   border-radius: 12px;
@@ -57,6 +61,7 @@ body {
   display: none;
 }
 
+/* ---------- Job Description ---------- */
 .job-description-section {
   margin-top: 25px;
 }
@@ -69,8 +74,10 @@ body {
   padding: 15px;
   resize: none;
   font-family: inherit;
+  font-size: 1em;
 }
 
+/* ---------- Buttons ---------- */
 .scan-button {
   width: 100%;
   margin-top: 25px;
@@ -88,6 +95,7 @@ body {
   transform: scale(1.02);
 }
 
+/* ---------- Loading Spinner ---------- */
 .loading {
   display: none;
   text-align: center;
@@ -108,9 +116,74 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* ---------- Results Section ---------- */
 .results-section {
   margin-top: 30px;
   background: rgba(0,0,0,0.3);
   padding: 20px;
   border-radius: 10px;
+  overflow-x: auto;
+  word-wrap: break-word;
+}
+
+/* ---------- Mobile Optimization ---------- */
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .container {
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.8em;
+  }
+
+  .main-card {
+    padding: 20px;
+  }
+
+  .upload-section {
+    padding: 25px;
+  }
+
+  .upload-icon {
+    font-size: 40px;
+  }
+
+  .job-description {
+    height: 100px;
+    font-size: 0.95em;
+  }
+
+  .scan-button {
+    font-size: 1em;
+    padding: 12px;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5em;
+  }
+
+  .upload-section {
+    padding: 20px;
+  }
+
+  .job-description {
+    height: 90px;
+  }
+
+  .scan-button {
+    padding: 10px;
+  }
 }
