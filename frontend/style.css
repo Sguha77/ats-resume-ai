@@ -297,3 +297,37 @@ body {
 }
 
 
+/* ---------- Responsive Fix for Feature Hover Boxes ---------- */
+@media (max-width: 768px) {
+  .feature-box,
+  .hover-box {
+    width: 100%;
+    max-width: 320px;       /* prevent oversizing on tablets */
+    margin: 10px auto;      /* center horizontally */
+    padding: 16px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+  }
+
+  .features-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
+/* For very small phones */
+@media (max-width: 400px) {
+  .feature-box,
+  .hover-box {
+    max-width: 280px;
+    padding: 12px;
+    font-size: 0.85em;
+  }
+
+  .features-container {
+    padding: 10px;
+  }
+}
