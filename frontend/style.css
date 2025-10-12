@@ -127,87 +127,58 @@ body {
 }
 /* ---------- Mobile Optimization ---------- */
 @media (max-width: 768px) {
-  html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    touch-action: pan-y;
-  }
-
   body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 15px;
+    align-items: center;     /* Centers all child elements horizontally */
+    justify-content: flex-start;
+    padding: 0;              /* Remove uneven body padding */
     margin: 0;
+    width: 100vw;
+    overflow-x: hidden;
   }
 
   .container {
-    width: 100%;
-    max-width: 100%;
-    padding: 15px;
-    margin: 0 auto;
+    width: 95%;              /* Adds balanced left+right space */
+    max-width: 600px;        /* Keeps it readable */
+    margin: 0 auto;          /* Centers the container */
+    padding: 20px;           /* Inner spacing */
     box-sizing: border-box;
   }
 
   .header h1 {
-    font-size: 1.6em;
+    font-size: 1.8em;
     text-align: center;
-    line-height: 1.3em;
-    margin-bottom: 15px;
-    word-wrap: break-word;
   }
 
   .main-card {
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    box-sizing: border-box;
+    padding: 20px;
   }
 
   .upload-section {
-    width: 100%;
-    padding: 20px 10px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    font-size: 0.9em;
+    padding: 25px;
   }
 
   .upload-icon {
-    font-size: 36px;
+    font-size: 40px;
   }
 
   .job-description {
-    width: 100%;
-    height: 90px;
-    font-size: 0.9em;
-    border-radius: 8px;
-    box-sizing: border-box;
+    height: 100px;
+    font-size: 0.95em;
   }
 
   .scan-button {
-    width: 100%;
-    font-size: 0.95em;
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  .results-section {
-    width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    font-size: 0.9em;
-    line-height: 1.4em;
-    box-sizing: border-box;
+    font-size: 1em;
+    padding: 12px;
   }
 
   pre {
     white-space: pre-wrap;
-    font-size: 0.85em;
-    overflow-x: auto;
-    word-break: break-word;
+    font-size: 0.9em;
   }
 }
+
 
 /* ---------- Extra Small Phones (below 400px) ---------- */
 @media (max-width: 400px) {
