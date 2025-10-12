@@ -297,37 +297,53 @@ body {
 }
 
 
-/* ---------- Responsive Fix for Feature Hover Boxes ---------- */
 @media (max-width: 768px) {
-  .feature-box,
-  .hover-box {
-    width: 100%;
-    max-width: 320px;       /* prevent oversizing on tablets */
-    margin: 10px auto;      /* center horizontally */
-    padding: 16px;
-    font-size: 0.95em;
-    box-sizing: border-box;
-  }
-
-  .features-container {
-    display: flex;
+  .home-page .features-container {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 16px;
+    gap: 20px;
+  }
+
+  .home-page .feature-box,
+  .home-page .hover-box,
+  .home-page .feature-card {
+    width: 90%;
+    max-width: 360px;
+    padding: 20px;
+  }
+
+  .home-page .feature-box h3,
+  .home-page .hover-box h3,
+  .home-page .feature-card h3 {
+    font-size: 1.2em;
+  }
+
+  .home-page .feature-box p,
+  .home-page .hover-box p,
+  .home-page .feature-card p {
+    font-size: 0.95em;
   }
 }
 
-/* For very small phones */
-@media (max-width: 400px) {
-  .feature-box,
-  .hover-box {
-    max-width: 280px;
-    padding: 12px;
-    font-size: 0.85em;
+/* Extra small phones (below 480px) */
+@media (max-width: 480px) {
+  .home-page .feature-box,
+  .home-page .hover-box,
+  .home-page .feature-card {
+    width: 95%;
+    max-width: 320px;
+    padding: 15px;
   }
 
-  .features-container {
-    padding: 10px;
+  .home-page .feature-box h3,
+  .home-page .hover-box h3,
+  .home-page .feature-card h3 {
+    font-size: 1em;
+  }
+
+  .home-page .feature-box p,
+  .home-page .hover-box p,
+  .home-page .feature-card p {
+    font-size: 0.85em;
   }
 }
