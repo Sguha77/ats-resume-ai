@@ -57,18 +57,7 @@ async function loginUser() {
     const data = await response.json();
 
     if (response.ok) {
-      // 🧹 Clear any old session data to avoid stale profile info
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-
-      // 💾 Save new token
       localStorage.setItem("token", data.token);
-
-      // 💾 Save user details if returned by backend
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
       alert("Login successful!");
       window.location.href = "dashboard.html";
     } else {
