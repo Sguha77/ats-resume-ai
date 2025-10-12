@@ -135,87 +135,92 @@ body {
   }
 
   body {
-    align-items: flex-start;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
     margin: 0;
   }
 
   .container {
     width: 100%;
     max-width: 100%;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 15px;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
   .header h1 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     text-align: center;
+    line-height: 1.3em;
+    margin-bottom: 15px;
     word-wrap: break-word;
   }
 
   .main-card {
     width: 100%;
-    padding: 20px;
-    border-radius: 12px;
+    padding: 15px;
+    border-radius: 10px;
     box-sizing: border-box;
   }
 
   .upload-section {
     width: 100%;
-    padding: 25px;
+    padding: 20px 10px;
     border-radius: 10px;
     box-sizing: border-box;
+    font-size: 0.9em;
   }
 
   .upload-icon {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .job-description {
     width: 100%;
-    height: 100px;
-    font-size: 0.95em;
+    height: 90px;
+    font-size: 0.9em;
     border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .scan-button {
     width: 100%;
-    font-size: 1em;
-    padding: 12px;
-    border-radius: 10px;
+    font-size: 0.95em;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .results-section {
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-size: 0.9em;
+    line-height: 1.4em;
+    box-sizing: border-box;
   }
 
   pre {
     white-space: pre-wrap;
-    font-size: 0.9em;
+    font-size: 0.85em;
     overflow-x: auto;
+    word-break: break-word;
   }
 }
 
 /* ---------- Extra Small Phones (below 400px) ---------- */
 @media (max-width: 400px) {
-  html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  .container {
-    padding: 15px;
-  }
-
   .header h1 {
-    font-size: 1.4em;
-    line-height: 1.3em;
+    font-size: 1.3em;
   }
 
   .upload-section {
-    padding: 20px;
+    padding: 15px 8px;
   }
 
   .upload-icon {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   .job-description {
@@ -224,14 +229,14 @@ body {
   }
 
   .scan-button {
-    font-size: 0.9em;
-    padding: 10px;
+    font-size: 0.85em;
+    padding: 8px;
   }
 
   pre {
     font-size: 0.8em;
-    word-break: break-word;
   }
 }
+
 
 
