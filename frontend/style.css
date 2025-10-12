@@ -132,6 +132,7 @@ body {
     flex-direction: column;
     align-items: center;     /* Centers all child elements horizontally */
     justify-content: flex-start;
+    padding-top: 70px;
     padding: 0;              /* Remove uneven body padding */
     margin: 0;
     width: 100vw;
