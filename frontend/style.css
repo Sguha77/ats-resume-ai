@@ -170,20 +170,32 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.5em;
+/* Extra small phones (below 400px) */
+@media (max-width: 400px) {
+  .container {
+    padding: 15px;
   }
 
-  .upload-section {
-    padding: 20px;
+  .header h1 {
+    font-size: 1.3em;
+  }
+
+  .upload-icon {
+    font-size: 32px;
   }
 
   .job-description {
-    height: 90px;
+    height: 80px;
+    font-size: 0.85em;
   }
 
   .scan-button {
+    font-size: 0.9em;
     padding: 10px;
   }
+
+  pre {
+    font-size: 0.8em;
+  }
 }
+
