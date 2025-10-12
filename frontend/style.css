@@ -125,29 +125,47 @@ body {
   overflow-x: auto;
   word-wrap: break-word;
 }
-
 /* ---------- Mobile Optimization ---------- */
 @media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    touch-action: pan-y;
+  }
+
   body {
     align-items: flex-start;
     padding: 20px;
+    margin: 0;
   }
 
   .container {
+    width: 100%;
+    max-width: 100%;
     padding: 20px;
     margin-top: 20px;
+    box-sizing: border-box;
   }
 
   .header h1 {
     font-size: 1.8em;
+    text-align: center;
+    word-wrap: break-word;
   }
 
   .main-card {
+    width: 100%;
     padding: 20px;
+    border-radius: 12px;
+    box-sizing: border-box;
   }
 
   .upload-section {
+    width: 100%;
     padding: 25px;
+    border-radius: 10px;
+    box-sizing: border-box;
   }
 
   .upload-icon {
@@ -155,29 +173,45 @@ body {
   }
 
   .job-description {
+    width: 100%;
     height: 100px;
     font-size: 0.95em;
+    border-radius: 8px;
   }
 
   .scan-button {
+    width: 100%;
     font-size: 1em;
     padding: 12px;
+    border-radius: 10px;
   }
 
   pre {
     white-space: pre-wrap;
     font-size: 0.9em;
+    overflow-x: auto;
   }
 }
 
-/* Extra small phones (below 400px) */
+/* ---------- Extra Small Phones (below 400px) ---------- */
 @media (max-width: 400px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   .container {
     padding: 15px;
   }
 
   .header h1 {
-    font-size: 1.3em;
+    font-size: 1.4em;
+    line-height: 1.3em;
+  }
+
+  .upload-section {
+    padding: 20px;
   }
 
   .upload-icon {
@@ -196,6 +230,8 @@ body {
 
   pre {
     font-size: 0.8em;
+    word-break: break-word;
   }
 }
+
 
