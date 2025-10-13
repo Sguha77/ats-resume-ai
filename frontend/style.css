@@ -297,53 +297,67 @@ body {
 }
 
 
+/* ---------- ✅ FIX: Make feature boxes responsive on mobile ---------- */
 @media (max-width: 768px) {
-  .home-page .features-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  .features {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 0 5vw !important;
+    box-sizing: border-box !important;
   }
 
-  .home-page .feature-box,
-  .home-page .hover-box,
-  .home-page .feature-card {
-    width: 90%;
-    max-width: 360px;
-    padding: 20px;
+  .features .feature-box,
+  .features .hover-box,
+  .features .feature-card {
+    width: 90% !important;
+    max-width: 360px !important;
+    padding: 18px !important;
+    text-align: center !important;
+    margin: 0 auto !important;
   }
 
-  .home-page .feature-box h3,
-  .home-page .hover-box h3,
-  .home-page .feature-card h3 {
-    font-size: 1.2em;
+  .features .feature-box h3,
+  .features .hover-box h3,
+  .features .feature-card h3 {
+    font-size: 1.1em !important;
+    margin-bottom: 8px !important;
   }
 
-  .home-page .feature-box p,
-  .home-page .hover-box p,
-  .home-page .feature-card p {
-    font-size: 0.95em;
+  .features .feature-box p,
+  .features .hover-box p,
+  .features .feature-card p {
+    font-size: 0.9em !important;
+    line-height: 1.4 !important;
   }
 }
 
-/* Extra small phones (below 480px) */
-@media (max-width: 480px) {
-  .home-page .feature-box,
-  .home-page .hover-box,
-  .home-page .feature-card {
-    width: 95%;
-    max-width: 320px;
-    padding: 15px;
+@media (max-width: 420px) {
+  .features {
+    gap: 14px !important;
+    padding: 0 4vw !important;
   }
 
-  .home-page .feature-box h3,
-  .home-page .hover-box h3,
-  .home-page .feature-card h3 {
-    font-size: 1em;
+  .features .feature-box,
+  .features .hover-box,
+  .features .feature-card {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 15px !important;
   }
 
-  .home-page .feature-box p,
-  .home-page .hover-box p,
-  .home-page .feature-card p {
-    font-size: 0.85em;
+  .features .feature-box h3,
+  .features .hover-box h3,
+  .features .feature-card h3 {
+    font-size: 1em !important;
+  }
+
+  .features .feature-box p,
+  .features .hover-box p,
+  .features .feature-card p {
+    font-size: 0.85em !important;
   }
 }
+
