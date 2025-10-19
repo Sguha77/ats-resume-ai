@@ -83,7 +83,7 @@ export const getAISuggestions = async (req, res) => {
       const shuffled = baseSuggestions.sort(() => Math.random() - 0.5);
       const selected = shuffled.slice(0, Math.floor(Math.random() * 3) + 4);
 
-      improvedText = `🧠 AI Suggestions for your Resume:\n\n- ${selected.join("\n- ")}`;
+      improvedText = `🧠 AI Resume Suggestions:\n\n- ${selected.join("\n- ")}`;
     }
 
     // save resume to DB
