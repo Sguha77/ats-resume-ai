@@ -7,7 +7,7 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
 
 ## 🚀 Live Demo  
  
-👉 [Try it now](https://ats-resume-scanner.netlify.app)
+👉 [Try it now - https://ats-resume-scanner.netlify.app](https://ats-resume-scanner.netlify.app) 
 
 ---
 
@@ -16,10 +16,10 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
   <img src="assets/ss1.png" alt="ATS-Resume-AI Preview" width="600">
 </p>
 <p align="left">
-  <img src="assets/ss2.png" alt="ATS-Resume-AI Preview" width="600">
+  <img src="assets/ss2.png" alt="ATS-Resume-AI Preview" width="400">
 </p>
 <p align="right">
-  <img src="assets/ss3.png" alt="ATS-Resume-AI Preview" width="600">
+  <img src="assets/ss3.png" alt="ATS-Resume-AI Preview" width="400">
 </p>
 <p align="center">
   <img src="assets/ss4.png" alt="ATS-Resume-AI Preview" width="600">
@@ -47,7 +47,7 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
 
 👤 Author
 
-Subhankar Guha<br>
+Subhankar Guha
 🔗 GitHub Profile - https://github.com/Sguha77
 
 ---
