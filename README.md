@@ -17,7 +17,7 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
 </p>
 <p align="center">
   <img src="assets/ss2.png" alt="ATS-Resume-AI Preview" width="400">
-  <img src="assets/ss3.png" alt="ATS-Resume-AI Preview" width="400">
+  <img src="assets/ss3.png" alt="ATS-Resume-AI Preview" width="500">
 </p>
 <p align="center">
   <img src="assets/ss4.png" alt="ATS-Resume-AI Preview" width="600">
@@ -45,7 +45,7 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
 
 👤 Author
 
-Subhankar Guha
+Subhankar Guha<br><Br>
 🔗 GitHub Profile - https://github.com/Sguha77
 
 ---
