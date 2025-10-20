@@ -15,10 +15,8 @@ Upload your resume, analyze how well it matches with job descriptions, and get a
 <p align="center">
   <img src="assets/ss1.png" alt="ATS-Resume-AI Preview" width="600">
 </p>
-<p align="left">
+<p align="center">
   <img src="assets/ss2.png" alt="ATS-Resume-AI Preview" width="400">
-</p>
-<p align="right">
   <img src="assets/ss3.png" alt="ATS-Resume-AI Preview" width="400">
 </p>
 <p align="center">
